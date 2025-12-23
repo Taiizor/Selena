@@ -1,0 +1,31 @@
+<Project>
+    <PropertyGroup>
+        <Deterministic>true</Deterministic>
+        <LangVersion>latest</LangVersion>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+        <GenerateDocumentationFile>false</GenerateDocumentationFile>
+        <NoWarn>$(NoWarn);CS1591</NoWarn>
+
+        <!-- Code Analysis -->
+        <EnableNETAnalyzers>true</EnableNETAnalyzers>
+        <AnalysisLevel>latest</AnalysisLevel>
+        <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+
+        <!-- Package Info -->
+        <Authors>Selena Contributors</Authors>
+        <Company>Selena Project</Company>
+        <Product>Selena Library</Product>
+        <Copyright>Copyright (c) 2025 Selena Contributors</Copyright>
+        <PackageProjectUrl>https://github.com/Taiizor/Selena</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/Taiizor/Selena</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <DefaultLanguage>en-GB</DefaultLanguage>
+        <NeutralLanguage>en-GB</NeutralLanguage>
+
+        <!-- Build Output -->
+        <OutputPath>$(MSBuildThisFileDirectory)artifacts\bin\$(MSBuildProjectName)\</OutputPath>
+        <BaseIntermediateOutputPath>$(MSBuildThisFileDirectory)artifacts\obj\$(MSBuildProjectName)\</BaseIntermediateOutputPath>
+    </PropertyGroup>
+</Project>

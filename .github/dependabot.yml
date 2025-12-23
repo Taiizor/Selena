@@ -1,0 +1,38 @@
+version: 2
+updates:
+  # Maintain dependencies for GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    labels:
+      - "dependencies"
+      - "github-actions"
+    commit-message:
+      prefix: "ci"
+
+  # Maintain dependencies for NuGet
+  - package-ecosystem: "nuget"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    labels:
+      - "dependencies"
+      - "nuget"
+    commit-message:
+      prefix: "deps"
+    groups:
+      development-dependencies:
+        patterns:
+          - "Microsoft.NET.Test.Sdk"
+          - "MSTest.*"
+          - "coverlet.*"
+          - "FluentAssertions"
+          - "Moq"
+          - "BenchmarkDotNet*"
+      microsoft-dependencies:
+        patterns:
+          - "Microsoft.*"
+          - "System.*"

@@ -1,0 +1,127 @@
+# GitHub Labels configuration
+# This file can be used with tools like github-label-sync
+# Usage: bunx github-label-sync --labels .github/labels.yml owner/repo
+
+- name: "bug"
+  color: "d73a4a"
+  description: "Something isn't working"
+
+- name: "documentation"
+  color: "0075ca"
+  description: "Improvements or additions to documentation"
+
+- name: "duplicate"
+  color: "cfd3d7"
+  description: "This issue or pull request already exists"
+
+- name: "enhancement"
+  color: "a2eeef"
+  description: "New feature or request"
+
+- name: "good first issue"
+  color: "7057ff"
+  description: "Good for newcomers"
+
+- name: "help wanted"
+  color: "008672"
+  description: "Extra attention is needed"
+
+- name: "invalid"
+  color: "e4e669"
+  description: "This doesn't seem right"
+
+- name: "question"
+  color: "d876e3"
+  description: "Further information is requested"
+
+- name: "wontfix"
+  color: "ffffff"
+  description: "This will not be worked on"
+
+- name: "priority: critical"
+  color: "b60205"
+  description: "Critical priority"
+
+- name: "priority: high"
+  color: "d93f0b"
+  description: "High priority"
+
+- name: "priority: medium"
+  color: "fbca04"
+  description: "Medium priority"
+
+- name: "priority: low"
+  color: "0e8a16"
+  description: "Low priority"
+
+- name: "type: bug"
+  color: "d73a4a"
+  description: "Bug report"
+
+- name: "type: feature"
+  color: "a2eeef"
+  description: "Feature request"
+
+- name: "type: performance"
+  color: "5319e7"
+  description: "Performance improvement"
+
+- name: "type: refactor"
+  color: "1d76db"
+  description: "Code refactoring"
+
+- name: "type: test"
+  color: "bfd4f2"
+  description: "Test related changes"
+
+- name: "area: core"
+  color: "c5def5"
+  description: "Core library functionality"
+
+- name: "area: api"
+  color: "c5def5"
+  description: "Public API"
+
+- name: "area: docs"
+  color: "c5def5"
+  description: "Documentation"
+
+- name: "area: build"
+  color: "c5def5"
+  description: "Build and CI/CD"
+
+- name: "area: tests"
+  color: "c5def5"
+  description: "Tests and test infrastructure"
+
+- name: "status: in progress"
+  color: "ededed"
+  description: "Work in progress"
+
+- name: "status: blocked"
+  color: "ededed"
+  description: "Blocked by other issues"
+
+- name: "status: needs review"
+  color: "ededed"
+  description: "Needs code review"
+
+- name: "dependencies"
+  color: "0366d6"
+  description: "Pull requests that update a dependency file"
+
+- name: "github-actions"
+  color: "000000"
+  description: "Pull requests that update GitHub Actions code"
+
+- name: "nuget"
+  color: "004880"
+  description: "Pull requests that update NuGet dependencies"
+
+- name: "triage"
+  color: "d4c5f9"
+  description: "Needs triage"
+
+- name: "breaking change"
+  color: "b60205"
+  description: "Contains breaking changes"

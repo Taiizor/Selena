@@ -1,0 +1,20 @@
+# Default owners for everything in the repo
+* @Taiizor
+
+# Core library
+/src/Selena/ @Taiizor
+
+# Tests
+/tests/ @Taiizor
+
+# Examples
+/examples/ @Taiizor
+
+# Documentation
+/docs/ @Taiizor
+*.md @Taiizor
+
+# Build and CI
+/.github/ @Taiizor
+build.* @Taiizor
+*.props @Taiizor

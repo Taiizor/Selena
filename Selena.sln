@@ -1,0 +1,95 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 18
+VisualStudioVersion = 18.3.11206.111 d18.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A1234567-8901-2345-6789-012345678901}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Selena", "src\Selena\Selena.csproj", "{F1234567-8901-2345-6789-012345678901}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "examples", "examples", "{B1234567-8901-2345-6789-012345678901}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Selena.Examples.Simple", "examples\Selena.Examples.Simple\Selena.Examples.Simple.csproj", "{E0000001-0000-0000-0000-000000000001}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Selena.Examples.Chat", "examples\Selena.Examples.Chat\Selena.Examples.Chat.csproj", "{E0000002-0000-0000-0000-000000000002}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Selena.Examples.Benchmark", "examples\Selena.Examples.Benchmark\Selena.Examples.Benchmark.csproj", "{E0000003-0000-0000-0000-000000000003}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Selena.Examples.Object", "examples\Selena.Examples.Object\Selena.Examples.Object.csproj", "{E0000004-0000-0000-0000-000000000004}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Selena.Examples.Stress", "examples\Selena.Examples.Stress\Selena.Examples.Stress.csproj", "{E0000005-0000-0000-0000-000000000005}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{C1234567-8901-2345-6789-012345678901}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Selena.Tests", "tests\Selena.Tests\Selena.Tests.csproj", "{F3456789-0123-4567-8901-234567890123}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Selena.Benchmarks", "tests\Selena.Benchmarks\Selena.Benchmarks.csproj", "{F4567890-1234-5678-9012-345678901234}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D1234567-8901-2345-6789-012345678901}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitignore = .gitignore
+		CHANGELOG.md = CHANGELOG.md
+		CONTRIBUTING.md = CONTRIBUTING.md
+		Directory.Build.props = Directory.Build.props
+		global.json = global.json
+		LICENSE = LICENSE
+		nuget.config = nuget.config
+		README.md = README.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F1234567-8901-2345-6789-012345678901}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1234567-8901-2345-6789-012345678901}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1234567-8901-2345-6789-012345678901}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1234567-8901-2345-6789-012345678901}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0000001-0000-0000-0000-000000000001}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0000001-0000-0000-0000-000000000001}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0000001-0000-0000-0000-000000000001}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0000001-0000-0000-0000-000000000001}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0000002-0000-0000-0000-000000000002}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0000002-0000-0000-0000-000000000002}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0000002-0000-0000-0000-000000000002}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0000002-0000-0000-0000-000000000002}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0000003-0000-0000-0000-000000000003}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0000003-0000-0000-0000-000000000003}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0000003-0000-0000-0000-000000000003}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0000003-0000-0000-0000-000000000003}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0000004-0000-0000-0000-000000000004}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0000004-0000-0000-0000-000000000004}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0000004-0000-0000-0000-000000000004}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0000004-0000-0000-0000-000000000004}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0000005-0000-0000-0000-000000000005}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0000005-0000-0000-0000-000000000005}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0000005-0000-0000-0000-000000000005}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0000005-0000-0000-0000-000000000005}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3456789-0123-4567-8901-234567890123}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3456789-0123-4567-8901-234567890123}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3456789-0123-4567-8901-234567890123}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3456789-0123-4567-8901-234567890123}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4567890-1234-5678-9012-345678901234}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4567890-1234-5678-9012-345678901234}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4567890-1234-5678-9012-345678901234}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4567890-1234-5678-9012-345678901234}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F1234567-8901-2345-6789-012345678901} = {A1234567-8901-2345-6789-012345678901}
+		{E0000001-0000-0000-0000-000000000001} = {B1234567-8901-2345-6789-012345678901}
+		{E0000002-0000-0000-0000-000000000002} = {B1234567-8901-2345-6789-012345678901}
+		{E0000003-0000-0000-0000-000000000003} = {B1234567-8901-2345-6789-012345678901}
+		{E0000004-0000-0000-0000-000000000004} = {B1234567-8901-2345-6789-012345678901}
+		{E0000005-0000-0000-0000-000000000005} = {B1234567-8901-2345-6789-012345678901}
+		{F3456789-0123-4567-8901-234567890123} = {C1234567-8901-2345-6789-012345678901}
+		{F4567890-1234-5678-9012-345678901234} = {C1234567-8901-2345-6789-012345678901}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E1234567-8901-2345-6789-012345678901}
+	EndGlobalSection
+EndGlobal
