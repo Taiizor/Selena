@@ -95,6 +95,7 @@ jobs:
         environment: nuget
         permissions:
             contents: write
+            packages: write
 
         steps:
             - name: Download NuGet packages
