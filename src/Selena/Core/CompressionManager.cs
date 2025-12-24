@@ -1,6 +1,7 @@
 using Selena.Messaging;
 using System.Buffers;
 using System.IO.Compression;
+using System.Runtime.InteropServices;
 
 namespace Selena.Core
 {
@@ -245,7 +246,7 @@ namespace Selena.Core
     /// <summary>
     /// Extended message header with compression support.
     /// </summary>
-    [System.Runtime.InteropServices.StructLayout(System.Runtime.InteropServices.LayoutKind.Sequential, Pack = 1)]
+    [StructLayout(LayoutKind.Sequential, Pack = 1)]
     public struct CompressedMessageHeader
     {
         public MessageHeader BaseHeader;
@@ -254,7 +255,7 @@ namespace Selena.Core
 
         public const int Size = MessageHeader.Size + 5; // Base + 4 + 1
 
-        public bool IsCompressed => (Flags & 1) != 0;
+        public readonly bool IsCompressed => (Flags & 1) != 0;
 
         public static CompressedMessageHeader Create(int payloadLength, int messageType, bool isCompressed, int originalSize)
         {

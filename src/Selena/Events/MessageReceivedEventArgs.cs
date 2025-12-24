@@ -5,32 +5,25 @@ namespace Selena.Events
     /// <summary>
     /// Event arguments for message received events.
     /// </summary>
-    public class MessageReceivedEventArgs : EventArgs
+    /// <remarks>
+    /// Creates a new instance of MessageReceivedEventArgs.
+    /// </remarks>
+    public class MessageReceivedEventArgs(Message message, string channelName) : EventArgs
     {
         /// <summary>
         /// The received message.
         /// </summary>
-        public Message Message { get; }
+        public Message Message { get; } = message ?? throw new ArgumentNullException(nameof(message));
 
         /// <summary>
         /// The channel name where the message was received.
         /// </summary>
-        public string ChannelName { get; }
+        public string ChannelName { get; } = channelName ?? throw new ArgumentNullException(nameof(channelName));
 
         /// <summary>
         /// The time when the message was received locally.
         /// </summary>
-        public DateTime ReceivedTime { get; }
-
-        /// <summary>
-        /// Creates a new instance of MessageReceivedEventArgs.
-        /// </summary>
-        public MessageReceivedEventArgs(Message message, string channelName)
-        {
-            Message = message ?? throw new ArgumentNullException(nameof(message));
-            ChannelName = channelName ?? throw new ArgumentNullException(nameof(channelName));
-            ReceivedTime = DateTime.UtcNow;
-        }
+        public DateTime ReceivedTime { get; } = DateTime.UtcNow;
 
         /// <summary>
         /// Gets the message payload as text.

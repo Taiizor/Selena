@@ -5,21 +5,11 @@ namespace Selena.Messaging
     /// <summary>
     /// Handles sending messages through the circular buffer.
     /// </summary>
-    internal class Sender : IDisposable
+    internal class Sender(CircularBuffer buffer, CrossPlatformSync sync, int maxWaitTime, bool enableLogging = false) : IDisposable
     {
-        private readonly CircularBuffer _buffer;
-        private readonly CrossPlatformSync _sync;
-        private readonly int _maxWaitTime;
-        private readonly bool _enableLogging;
         private bool _disposed;
-
-        public Sender(CircularBuffer buffer, CrossPlatformSync sync, int maxWaitTime, bool enableLogging = false)
-        {
-            _buffer = buffer ?? throw new ArgumentNullException(nameof(buffer));
-            _sync = sync ?? throw new ArgumentNullException(nameof(sync));
-            _maxWaitTime = maxWaitTime;
-            _enableLogging = enableLogging;
-        }
+        private readonly CrossPlatformSync _sync = sync ?? throw new ArgumentNullException(nameof(sync));
+        private readonly CircularBuffer _buffer = buffer ?? throw new ArgumentNullException(nameof(buffer));
 
         /// <summary>
         /// Sends a message.
@@ -45,7 +35,7 @@ namespace Selena.Messaging
             byte[] messageBytes = Serializer.SerializeMessage(message);
 
             // Acquire lock
-            TimeSpan timeout = TimeSpan.FromMilliseconds(_maxWaitTime);
+            TimeSpan timeout = TimeSpan.FromMilliseconds(maxWaitTime);
             if (!_sync.AcquireLock(timeout))
             {
                 LogError("Failed to acquire lock for sending");
@@ -62,7 +52,7 @@ namespace Selena.Messaging
                     // Signal data available
                     _sync.SignalDataAvailable();
 
-                    if (_enableLogging)
+                    if (enableLogging)
                     {
                         LogInfo($"Sent message: Type={message.Header.MessageType}, Size={message.Header.TotalLength}");
                     }
@@ -167,7 +157,7 @@ namespace Selena.Messaging
 
         private void LogInfo(string message)
         {
-            if (_enableLogging)
+            if (enableLogging)
             {
                 Console.WriteLine($"[Selena.Sender] {DateTime.UtcNow:yyyy-MM-dd HH:mm:ss.fff} INFO: {message}");
             }
@@ -175,7 +165,7 @@ namespace Selena.Messaging
 
         private void LogError(string message)
         {
-            if (_enableLogging)
+            if (enableLogging)
             {
                 Console.WriteLine($"[Selena.Sender] {DateTime.UtcNow:yyyy-MM-dd HH:mm:ss.fff} ERROR: {message}");
             }

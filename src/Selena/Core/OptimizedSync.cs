@@ -249,17 +249,10 @@ namespace Selena.Core
     /// <summary>
     /// Notification about available message.
     /// </summary>
-    public readonly struct MessageNotification
+    public readonly struct MessageNotification(long position, int length)
     {
-        public long Position { get; }
-        public int Length { get; }
-        public DateTime Timestamp { get; }
-
-        public MessageNotification(long position, int length)
-        {
-            Position = position;
-            Length = length;
-            Timestamp = DateTime.UtcNow;
-        }
+        public int Length { get; } = length;
+        public long Position { get; } = position;
+        public DateTime Timestamp { get; } = DateTime.UtcNow;
     }
 }

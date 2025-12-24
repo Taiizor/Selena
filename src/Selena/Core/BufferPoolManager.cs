@@ -67,10 +67,10 @@ namespace Selena.Core
             Length = usedLength;
         }
 
-        public byte[] Buffer => _buffer ?? throw new ObjectDisposedException(nameof(PooledBuffer));
         public int Length { get; }
-        public Memory<byte> Memory => new(_buffer, 0, Length);
-        public Span<byte> Span => new(_buffer, 0, Length);
+        public readonly Span<byte> Span => new(_buffer, 0, Length);
+        public readonly Memory<byte> Memory => new(_buffer, 0, Length);
+        public readonly byte[] Buffer => _buffer ?? throw new ObjectDisposedException(nameof(PooledBuffer));
 
         public void Dispose()
         {

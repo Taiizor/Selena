@@ -56,7 +56,7 @@ namespace Selena.Messaging
         /// <summary>
         /// Validates the header.
         /// </summary>
-        public bool IsValid()
+        public readonly bool IsValid()
         {
             return TotalLength >= Size &&
                    PayloadLength >= 0 &&
@@ -84,7 +84,7 @@ namespace Selena.Messaging
         /// </summary>
         public Message()
         {
-            Payload = Array.Empty<byte>();
+            Payload = [];
         }
 
         /// <summary>

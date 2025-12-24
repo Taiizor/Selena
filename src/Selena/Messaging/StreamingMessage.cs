@@ -3,44 +3,34 @@ namespace Selena.Messaging
     /// <summary>
     /// Represents a message that can be sent in chunks for large payloads.
     /// </summary>
-    public class StreamingMessage
+    public class StreamingMessage(byte[] data, int messageType, int chunkSize = 65536)
     {
         /// <summary>
         /// Unique ID for this streaming message.
         /// </summary>
-        public Guid StreamId { get; }
+        public Guid StreamId { get; } = Guid.NewGuid();
 
         /// <summary>
         /// Total number of chunks.
         /// </summary>
-        public int TotalChunks { get; }
+        public int TotalChunks { get; } = (int)Math.Ceiling((double)data.Length / chunkSize);
 
         /// <summary>
         /// Size of each chunk (except possibly the last one).
         /// </summary>
-        public int ChunkSize { get; }
+        public int ChunkSize { get; } = chunkSize;
 
         /// <summary>
         /// Original message type.
         /// </summary>
-        public int MessageType { get; }
+        public int MessageType { get; } = messageType;
 
         /// <summary>
         /// Total payload size.
         /// </summary>
-        public long TotalSize { get; }
+        public long TotalSize { get; } = data.Length;
 
-        private readonly byte[] _data;
-
-        public StreamingMessage(byte[] data, int messageType, int chunkSize = 65536) // 64KB default chunk
-        {
-            _data = data ?? throw new ArgumentNullException(nameof(data));
-            StreamId = Guid.NewGuid();
-            MessageType = messageType;
-            ChunkSize = chunkSize;
-            TotalSize = data.Length;
-            TotalChunks = (int)Math.Ceiling((double)data.Length / chunkSize);
-        }
+        private readonly byte[] _data = data ?? throw new ArgumentNullException(nameof(data));
 
         /// <summary>
         /// Gets a specific chunk.
@@ -89,7 +79,7 @@ namespace Selena.Messaging
         public Guid StreamId { get; set; }
         public int ChunkIndex { get; set; }
         public int TotalChunks { get; set; }
-        public byte[] ChunkData { get; set; } = Array.Empty<byte>();
+        public byte[] ChunkData { get; set; } = [];
         public int MessageType { get; set; }
         public long TotalSize { get; set; }
 
@@ -102,15 +92,9 @@ namespace Selena.Messaging
     /// <summary>
     /// Assembles chunks back into a complete message.
     /// </summary>
-    public class StreamingMessageAssembler
+    public class StreamingMessageAssembler(int timeoutSeconds = 60)
     {
         private readonly Dictionary<Guid, ChunkAssemblyState> _activeStreams = [];
-        private readonly int _timeoutSeconds;
-
-        public StreamingMessageAssembler(int timeoutSeconds = 60)
-        {
-            _timeoutSeconds = timeoutSeconds;
-        }
 
         /// <summary>
         /// Adds a chunk and returns the complete data if all chunks are received.
@@ -179,10 +163,9 @@ namespace Selena.Messaging
 
         private void CleanupExpiredStreams()
         {
-            List<Guid> expiredStreams = _activeStreams
-                .Where(kvp => DateTime.UtcNow - kvp.Value.LastChunkTime > TimeSpan.FromSeconds(_timeoutSeconds))
-                .Select(kvp => kvp.Key)
-                .ToList();
+            List<Guid> expiredStreams = [.. _activeStreams
+                .Where(kvp => DateTime.UtcNow - kvp.Value.LastChunkTime > TimeSpan.FromSeconds(timeoutSeconds))
+                .Select(kvp => kvp.Key)];
 
             foreach (Guid streamId in expiredStreams)
             {
@@ -194,8 +177,8 @@ namespace Selena.Messaging
         {
             public Guid StreamId { get; set; }
             public int TotalChunks { get; set; }
-            public bool[] ReceivedChunks { get; set; } = Array.Empty<bool>();
-            public byte[][] Chunks { get; set; } = Array.Empty<byte[]>();
+            public bool[] ReceivedChunks { get; set; } = [];
+            public byte[][] Chunks { get; set; } = [];
             public int MessageType { get; set; }
             public long TotalSize { get; set; }
             public DateTime FirstChunkTime { get; set; }

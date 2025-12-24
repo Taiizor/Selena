@@ -7,31 +7,17 @@ namespace Selena.Messaging
     /// <summary>
     /// Optimized sender with memory pooling, compression, and improved locking.
     /// </summary>
-    internal class OptimizedSender : IDisposable
+    internal class OptimizedSender(
+        CircularBuffer buffer,
+        OptimizedSync sync,
+        int maxWaitTime,
+        bool enableLogging = false,
+        bool enableCompression = true,
+        int compressionThreshold = 1024) : IDisposable
     {
-        private readonly CircularBuffer _buffer;
-        private readonly OptimizedSync _sync;
-        private readonly int _maxWaitTime;
-        private readonly bool _enableLogging;
-        private readonly bool _enableCompression;
-        private readonly int _compressionThreshold;
         private bool _disposed;
-
-        public OptimizedSender(
-            CircularBuffer buffer,
-            OptimizedSync sync,
-            int maxWaitTime,
-            bool enableLogging = false,
-            bool enableCompression = true,
-            int compressionThreshold = 1024)
-        {
-            _buffer = buffer ?? throw new ArgumentNullException(nameof(buffer));
-            _sync = sync ?? throw new ArgumentNullException(nameof(sync));
-            _maxWaitTime = maxWaitTime;
-            _enableLogging = enableLogging;
-            _enableCompression = enableCompression;
-            _compressionThreshold = compressionThreshold;
-        }
+        private readonly OptimizedSync _sync = sync ?? throw new ArgumentNullException(nameof(sync));
+        private readonly CircularBuffer _buffer = buffer ?? throw new ArgumentNullException(nameof(buffer));
 
         /// <summary>
         /// Sends an optimized message with memory pooling.
@@ -54,7 +40,7 @@ namespace Selena.Messaging
             }
 
             // Determine if compression should be used
-            bool shouldCompress = _enableCompression && message.Payload.Length >= _compressionThreshold;
+            bool shouldCompress = enableCompression && message.Payload.Length >= compressionThreshold;
 
             PooledBuffer? compressedBuffer = null;
             byte[]? messageBytes = null;
@@ -83,7 +69,7 @@ namespace Selena.Messaging
                 }
 
                 // Acquire write lock with timeout
-                TimeSpan timeout = TimeSpan.FromMilliseconds(_maxWaitTime);
+                TimeSpan timeout = TimeSpan.FromMilliseconds(maxWaitTime);
                 if (!_sync.AcquireWriteLock(timeout))
                 {
                     LogError("Failed to acquire write lock for sending");
@@ -104,7 +90,7 @@ namespace Selena.Messaging
 
                         await _sync.SignalMessageAvailableAsync(notification);
 
-                        if (_enableLogging)
+                        if (enableLogging)
                         {
                             LogInfo($"Sent message: Type={message.Header.MessageType}, " +
                                    $"Size={message.Header.TotalLength}, " +
@@ -167,7 +153,7 @@ namespace Selena.Messaging
         public async Task<int> SendBatchAsync(IEnumerable<OptimizedMessage> messages)
         {
             int successCount = 0;
-            TimeSpan timeout = TimeSpan.FromMilliseconds(_maxWaitTime);
+            TimeSpan timeout = TimeSpan.FromMilliseconds(maxWaitTime);
 
             // Acquire write lock once for the entire batch
             if (!_sync.AcquireWriteLock(timeout))
@@ -247,7 +233,7 @@ namespace Selena.Messaging
 
         private void LogInfo(string message)
         {
-            if (_enableLogging)
+            if (enableLogging)
             {
                 Console.WriteLine($"[Selena.OptimizedSender] {DateTime.UtcNow:yyyy-MM-dd HH:mm:ss.fff} INFO: {message}");
             }
@@ -255,7 +241,7 @@ namespace Selena.Messaging
 
         private void LogError(string message)
         {
-            if (_enableLogging)
+            if (enableLogging)
             {
                 Console.WriteLine($"[Selena.OptimizedSender] {DateTime.UtcNow:yyyy-MM-dd HH:mm:ss.fff} ERROR: {message}");
             }
