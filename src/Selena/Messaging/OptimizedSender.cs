@@ -1,4 +1,6 @@
 using Selena.Core;
+using System.Text;
+using System.Text.Json;
 
 namespace Selena.Messaging
 {
@@ -146,7 +148,7 @@ namespace Selena.Messaging
         /// </summary>
         public async Task<bool> SendTextMessageAsync(string text, int messageType = 0)
         {
-            byte[] bytes = System.Text.Encoding.UTF8.GetBytes(text);
+            byte[] bytes = Encoding.UTF8.GetBytes(text);
             return await SendBytesAsync(bytes, messageType);
         }
 
@@ -155,7 +157,7 @@ namespace Selena.Messaging
         /// </summary>
         public async Task<bool> SendObjectAsync<T>(T obj, int messageType = 0)
         {
-            string json = System.Text.Json.JsonSerializer.Serialize(obj);
+            string json = JsonSerializer.Serialize(obj);
             return await SendTextMessageAsync(json, messageType);
         }
 
