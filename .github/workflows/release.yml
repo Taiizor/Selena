@@ -71,7 +71,7 @@ jobs:
                     --output ./artifacts/packages
 
             - name: Upload NuGet packages
-              uses: actions/upload-artifact@v6
+              uses: actions/upload-artifact@v7
               with:
                   name: Selena-${{ steps.version.outputs.version }}-nuget
                   path: ./artifacts/packages/*.nupkg
@@ -79,7 +79,7 @@ jobs:
                   overwrite: true
 
             - name: Upload Symbol packages
-              uses: actions/upload-artifact@v6
+              uses: actions/upload-artifact@v7
               with:
                   name: Selena-${{ steps.version.outputs.version }}-symbols
                   path: ./artifacts/packages/*.snupkg
